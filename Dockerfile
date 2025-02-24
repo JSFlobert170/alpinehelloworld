@@ -8,7 +8,9 @@ RUN apk add --no-cache --update python3 py3-pip bash
 COPY webapp/requirements.txt /tmp/requirements.txt
 
 # Installer les dépendances Python
-RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
+RUN python3 -m venv /opt/venv \
+    && . /opt/venv/bin/activate \
+    && pip install --no-cache-dir -q -r /tmp/requirements.txt
 
 # Copier le code source de l'application
 COPY webapp /opt/webapp/
